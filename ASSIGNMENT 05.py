@@ -1,15 +1,30 @@
 sum = 0
 temp = 0
-n = int(input("Enter the number of subjects: "))
+
+n = input("Enter the number of subjects: ")
+if n.isdigit() and int(n) > 0:
+    n = int(n)
+else:
+    print("Invalid input! Please enter a valid positive integer for the number of subjects.")
+    exit()
+
 for i in range(n):
-    marks = int(input(f"Enter marks for subject {i + 1}: "))
-    if marks > 100 or marks < 0:
-        print("Enter valid marks!")
+    marks = input(f"Enter marks for subject {i + 1}: ")
+    
+    if marks.isdigit():
+        marks = int(marks)
+        if marks > 100 or marks < 0:
+            print("Enter valid marks between 0 and 100!")
+            i -= 1
+            continue
+        if marks < 40:
+            temp = 1
+        sum += marks
+    else:
+        print("Invalid input! Please enter a valid integer for the marks.")
         i -= 1
         continue
-    if marks < 40:
-        temp = 1
-    sum += marks
+
 if temp == 0:
     percent = sum / n
     print("Your Percentage =", percent)
